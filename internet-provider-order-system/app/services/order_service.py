@@ -3,6 +3,7 @@ from app.models import Order, OrderItem, Product, Customer
 from app.services.pricing_service import PricingService
 from datetime import datetime
 import uuid
+import json
 
 class OrderService:
     def __init__(self):
@@ -25,8 +26,8 @@ class OrderService:
         order = Order(
             order_number=order_number,
             customer_id=data['customer_id'],
-            created_by=data['created_by'],
-            status='pending',
+            created_by_id=data['created_by'],
+            order_status='pending',
             total_amount=0,
             promotional_code=data.get('promotional_code'),
             negotiated_price=data.get('negotiated_price', 0)
@@ -54,7 +55,7 @@ class OrderService:
                     product_id=product.id,
                     quantity=quantity,
                     unit_price=unit_price,
-                    configuration=item_data.get('configuration', {})
+                    configuration=json.dumps(item_data.get('configuration', {}))
                 )
                 
                 db.session.add(order_item)
@@ -75,7 +76,7 @@ class OrderService:
         """Update order status"""
         order = self.get_order_by_id(order_id)
         if order:
-            order.status = status
+            order.order_status = status
             order.updated_at = datetime.now()
             db.session.commit()
         return order
@@ -110,7 +111,7 @@ class OrderService:
     
     def get_orders_by_status(self, status):
         """Get orders by status"""
-        return Order.query.filter_by(status=status).order_by(Order.created_at.desc()).all()
+        return Order.query.filter_by(order_status=status).order_by(Order.created_at.desc()).all()
     
     def get_recent_orders(self, limit=10):
         """Get recent orders"""
