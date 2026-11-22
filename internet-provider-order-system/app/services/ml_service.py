@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 import json
 
 from app import db
-from app.models import Customer, Product, Order, OrderItem, CompetitorPrice, CustomerAnalytics, OrderAnalytics, PricingModel
+from app.models import Customer, Product, Order, OrderItem, CompetitorPrice, CustomerAnalytics, OrderAnalytics, PricingModel, PriceHistory
 
 class MLService:
     def __init__(self):
@@ -20,8 +20,7 @@ class MLService:
     
     def ensure_models_directory(self):
         """Ensure models directory exists"""
-        if not os.path.exists(self.models_dir):
-            os.makedirs(self.models_dir)
+        os.makedirs(self.models_dir, exist_ok=True)
     
     def prepare_customer_data(self):
         """Prepare customer data for ML training"""

@@ -17,8 +17,9 @@ def create_sample_data():
     app = create_app()
     
     with app.app_context():
-        # Clear existing data
-        db.drop_all()
+        # Never erase an existing database when seeding the demo.
+        if User.query.first() or Product.query.first() or Customer.query.first():
+            raise SystemExit('Database already contains records. Use a separate empty demo database.')
         db.create_all()
         
         print("Creating sample data...")
