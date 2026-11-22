@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from flask_login import current_user
 from app import db
 from app.models import Customer, Product, Order, CompetitorPrice
 from app.services.pricing_service import PricingService
@@ -7,6 +8,12 @@ from datetime import datetime
 import json
 
 api_bp = Blueprint('api', __name__)
+
+@api_bp.before_request
+def require_authentication():
+    if not current_user.is_authenticated:
+        return jsonify({'error': 'Authentication required'}), 401
+
 pricing_service = PricingService()
 ml_service = MLService()
 

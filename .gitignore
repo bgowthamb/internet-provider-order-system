@@ -1,0 +1,10 @@
+**/.env
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/instance/
+**/ml_models/
+**/*.db
+**/*.sqlite*
+local-document-assistant/documents/
+local-document-assistant/private/

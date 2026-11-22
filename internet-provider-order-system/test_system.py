@@ -9,7 +9,7 @@ from app.services.pricing_service import PricingService
 from app.services.ml_service import MLService
 import json
 
-def test_system():
+def smoke_check():
     """Test the system functionality"""
     app = create_app()
     
@@ -142,4 +142,4 @@ def test_system():
         return True
 
 if __name__ == '__main__':
-    test_system() 
+    raise SystemExit(0 if smoke_check() else 1)

@@ -1,6 +1,6 @@
 # Internet Provider Order Entry System
 
-A comprehensive order management system for internet service providers with advanced predictive pricing models, competitor analysis, and customer behavior analytics.
+A portfolio prototype for internet service order management, predictive pricing, competitor analysis and customer analytics. The database models, services, login, dashboard and API are implemented; several secondary web screens are still under development. Use only synthetic data.
 
 ## Features
 
@@ -40,15 +40,15 @@ A comprehensive order management system for internet service providers with adva
 ## Installation
 
 ### Prerequisites
-- Python 3.8+
+- Python 3.12 (CI target)
 - pip package manager
 
 ### Setup Instructions
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd internet-provider-order-system
+   git clone https://github.com/bgowthamb/internet-provider-order-system.git
+   cd internet-provider-order-system/internet-provider-order-system
    ```
 
 2. **Create virtual environment**
@@ -64,7 +64,7 @@ A comprehensive order management system for internet service providers with adva
 
 4. **Set up environment variables**
    ```bash
-   cp .env.example .env
+   cp config.env.example .env
    # Edit .env with your configuration
    ```
 
@@ -80,7 +80,7 @@ A comprehensive order management system for internet service providers with adva
 
 7. **Access the application**
    - Open browser and go to `http://localhost:5000`
-   - Default admin credentials: admin/admin123
+   - Local demo credentials: admin/admin123 (never use demo credentials on a shared deployment)
 
 ## Project Structure
 
